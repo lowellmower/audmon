@@ -1,13 +1,9 @@
 package main
 
 import (
-	"github.com/lowellmower/audmon/pkg/client"
-    "github.com/lowellmower/audmon/pkg/daemon"
-    "github.com/lowellmower/audmon/pkg/server"
+    "github.com/lowellmower/audmon/pkg/cli"
 )
 
 func main() {
-    client.Printer()
-    daemon.Printer()
-    server.Printer()
+    cli.Run()
 }
