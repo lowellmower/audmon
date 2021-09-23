@@ -6,7 +6,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	clientAddr string
+	clientPort string
+)
+
 func init() {
+	clientCmd.Flags().StringVar(&clientAddr, "address", "0.0.0.0", "--address=<IPv4 address>")
+	clientCmd.Flags().StringVar(&clientPort, "port", "9009", "--address=<IPv4 address>")
 	rootCmd.AddCommand(clientCmd)
 }
 
@@ -17,7 +24,6 @@ var clientCmd = &cobra.Command{
 	Short: "Starts the audmon client.",
 	Long: `Some words about the audmon client...`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		client.Printer()
-		return nil
+		return client.Run(clientAddr+":"+clientPort)
 	},
 }
