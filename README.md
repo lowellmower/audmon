@@ -20,6 +20,7 @@ purchasable frameworks available. Use those.
 
 ### Project Goals
 - [ ] Establish Client Server Websocket Communication
+- [ ] Add logrus logging and setup
 - [ ] Construct a daemon which can listen on NETLINK socket for IPC messages
 - [ ] Push messages over the wire in JSON format to client machine
 - [ ] Provide an interface for viewing messages (client side)
