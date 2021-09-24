@@ -20,11 +20,20 @@ purchasable frameworks available. Use those.
 
 ### Project Goals
 - [ ] Establish Client Server Websocket Communication
-- [ ] Add logrus logging and setup
+- [x] Add logrus logging and setup
+- [x] Add basic configuration setup
 - [ ] Construct a daemon which can listen on NETLINK socket for IPC messages
 - [ ] Push messages over the wire in JSON format to client machine
 - [ ] Provide an interface for viewing messages (client side)
 - [ ] Collect and graph metrics using something like prometheus
+
+### Build and Run
+From the root of this project run `make build` which will place a binary named
+`audmon` under the project dir `bin/`. This binary exposes a CLI which should
+have helpful information enough to get you started by running:
+```
+$ ./bin/audmon -h
+```
 
 ### Quick Links/Info
 - [EC2 Dash](https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#Instances:)
