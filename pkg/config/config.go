@@ -28,10 +28,14 @@ func init() {
     LoadDefaults()
 }
 
+// DefaultConfig represents the basic config values for the application. This JSON
+// will be persisted to disk under /etc/audmon/audmon.conf.json and should that file
+// exists on start of the application, it will prefer those values over the defaults.
 var DefaultConfig = `
 {
   "log": {
     "level": "trace",
+    "file": "/var/log/audmon.log",
     "silent": false,
     "report_caller": false
   }
