@@ -1,47 +1,49 @@
 package server
 
 import (
-    "fmt"
-    "log"
-    "net/http"
-    "html/template"
+	"fmt"
+	"html/template"
+	//"log"
+	"net/http"
 
-    "github.com/gorilla/websocket"
+    "github.com/lowellmower/audmon/pkg/log"
+
+	"github.com/gorilla/websocket"
 )
 
 func Run(addr string) error {
-    fmt.Println(addr)
-    http.HandleFunc("/echo", echo)
-    http.HandleFunc("/", root)
-    return http.ListenAndServe(addr, nil)
+	fmt.Println(addr)
+	http.HandleFunc("/echo", echo)
+	http.HandleFunc("/", root)
+	return http.ListenAndServe(addr, nil)
 }
 
 var upgrader = websocket.Upgrader{} // use default options
 
 func echo(w http.ResponseWriter, r *http.Request) {
-    c, err := upgrader.Upgrade(w, r, nil)
-    if err != nil {
-        log.Print("upgrade:", err)
-        return
-    }
-    defer c.Close()
-    for {
-        mt, message, err := c.ReadMessage()
-        if err != nil {
-            log.Println("read:", err)
-            break
-        }
-        log.Printf("recv: %s", message)
-        err = c.WriteMessage(mt, message)
-        if err != nil {
-            log.Println("write:", err)
-            break
-        }
-    }
+	c, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Error("upgrade:", err)
+		return
+	}
+	defer c.Close()
+	for {
+		mt, message, err := c.ReadMessage()
+		if err != nil {
+			log.Error("read:", err)
+			break
+		}
+		log.Info("recv: %s", message)
+		err = c.WriteMessage(mt, message)
+		if err != nil {
+			log.Error("write:", err)
+			break
+		}
+	}
 }
 
 func root(w http.ResponseWriter, r *http.Request) {
-    homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
+	homeTemplate.Execute(w, "ws://"+r.Host+"/echo")
 }
 
 var homeTemplate = template.Must(template.New("").Parse(`
