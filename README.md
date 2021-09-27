@@ -26,6 +26,7 @@ purchasable frameworks available. Use those.
 - [ ] Push messages over the wire in JSON format to client machine
 - [ ] Provide an interface for viewing messages (client side)
 - [ ] Collect and graph metrics using something like prometheus
+- [ ] Establish and define API using protobufs
 
 ### Build and Run
 From the root of this project run `make build` which will place a binary named
