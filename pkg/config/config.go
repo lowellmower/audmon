@@ -48,6 +48,7 @@ var DefaultConfig = `
 type AudmonConfig struct {
     Log LogConfig `json:"log"`
     Registry *venom.Venom
+    Daemon DaemonArgs
 }
 
 // LogConfig is the structural representation of the config for the application's
@@ -60,6 +61,10 @@ type LogConfig struct {
 }
 
 var AppConf = &AudmonConfig{Registry: &venom.Venom{}}
+
+type DaemonArgs struct {
+    Foreground bool
+}
 
 // LoadConfig makes the assumption there is a file in place at the default file
 // path for config, /etc/audmon/audmon.conf.json
